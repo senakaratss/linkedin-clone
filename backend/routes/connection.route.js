@@ -17,7 +17,7 @@ router.put("/reject/:requestId", protectRoute, rejectConnectionRequest);
 // Get all connection requests for the authenticated user
 router.get("/requests", protectRoute, getConnectionRequests);
 
-// Get all connections for the authenticated user
+// Get all connections for the current user
 router.get("/", protectRoute, getUserConnections);
 router.delete("/:userId", protectRoute, removeConnection);
 router.get("/status/:userId", protectRoute, getConnectionStatus);
