@@ -61,12 +61,12 @@ export const deletePost = async (req, res) => {
     }
 
     //delete image from cloudinary
-    if (post.image)
-      [
-        await cloudinary.uploader.destroy(
-          post.image.split("/").pop().split(".")[0]
-        ),
-      ];
+
+    if (post.image) {
+      await cloudinary.uploader.destroy(
+        post.image.split("/").pop().split(".")[0]
+      );
+    }
 
     await Post.findByIdAndDelete(postId);
     res.status(200).json({ message: "Post deleted successfully" });
@@ -150,7 +150,7 @@ export const likePost = async (req, res) => {
       if (post.author.toString() !== userId.toString()) {
         const newNotification = new Notification({
           recipient: post.author,
-          typle: "like",
+          type: "like",
           relatedUser: userId,
           relatedPost: post._id,
         });

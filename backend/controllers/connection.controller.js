@@ -30,7 +30,7 @@ export const sendConnectionRequest = async (req, res) => {
 
     const newRequest = new ConnectionRequest({
       sender: senderId,
-      recipiient: userId,
+      recipient: userId,
     });
     await newRequest.save();
     res.status(201).json({ message: "Connection request sent successfully" });
@@ -114,7 +114,9 @@ export const rejectConnectionRequest = async (req, res) => {
     const request = await ConnectionRequest.findById(requestId);
 
     if (request.recipient.toString() !== userId.toString()) {
-      return;
+      return res
+        .status(403)
+        .json({ message: "Not authorized to reject this request" });
     }
     if (request.status !== "pending") {
       return res
