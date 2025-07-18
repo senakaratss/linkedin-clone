@@ -5,7 +5,9 @@ import { sendCommentNotificationEmail } from "../emails/emailHandlers.js";
 
 export const getFeedPosts = async (req, res) => {
   try {
-    const posts = await Post.find({ author: { $in: req.user.connections } })
+    const posts = await Post.find({
+      author: { $in: [...req.user.connections, req.user._id] },
+    })
       .populate("author", "name username profilePicture headline")
       .populate("comments.user", "name profilePicture")
       .sort({ createdAt: -1 });
@@ -24,7 +26,7 @@ export const createPost = async (req, res) => {
     let newPost;
 
     if (image) {
-      const imgResult = cloudinary.uploader.upload(image);
+      const imgResult = await cloudinary.uploader.upload(image);
       newPost = new Post({
         author: req.user._id,
         content,
@@ -103,7 +105,7 @@ export const createComment = async (req, res) => {
     ).populate("author", "name email username profilePicture headline");
 
     //create a notification if the comment iowner is not the post owner
-    if (post.author.toString() !== req.user._id.toString()) {
+    if (post.author._id.toString() !== req.user._id.toString()) {
       const newNotification = new Notification({
         recipient: post.author,
         type: "comment",

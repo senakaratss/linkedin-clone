@@ -12,6 +12,8 @@
   "dependencies": {
     "@tanstack/react-query": "^5.81.2",
     "axios": "^1.10.0",
+    "date-fns": "^4.1.0",
+    "linkedin-clone": "file:..",
     "lucide-react": "^0.523.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

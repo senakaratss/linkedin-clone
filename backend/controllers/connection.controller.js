@@ -1,6 +1,7 @@
 import ConnectionRequest from "../models/connectionRequest.model.js";
 import User from "../models/user.model.js";
 import { sendConnectionAcceptedEmail } from "../emails/emailHandlers.js";
+import Notification from "../models/notification.model.js";
 
 export const sendConnectionRequest = async (req, res) => {
   try {
@@ -77,7 +78,7 @@ export const acceptConnectionRequest = async (req, res) => {
 
     const notification = new Notification({
       recipient: request.sender._id,
-      releatedUser: userId,
+      relatedUser: userId,
       type: "connectionAccepted",
     });
     await notification.save();
@@ -185,7 +186,7 @@ export const removeConnection = async (req, res) => {
 
 export const getConnectionStatus = async (req, res) => {
   try {
-    const { targetUserId } = req.params.userId;
+    const targetUserId = req.params.userId;
     const currentUserId = req.user._id;
 
     const currentUser = req.user;

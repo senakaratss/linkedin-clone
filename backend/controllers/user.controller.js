@@ -13,7 +13,7 @@ export const getSuggestedConnections = async (req, res) => {
       },
     })
       .select("name username profilePicture headline")
-      .limit(3);
+      .limit(5);
     res.status(200).json(suggestedUsers);
   } catch (error) {
     console.log("Error in getSuggestedConnections controller:", error.message);
@@ -47,7 +47,7 @@ export const updateProfile = async (req, res) => {
       "profilePicture",
       "bannerImg",
       "skills",
-      "experience",
+      "experiences",
       "education",
     ];
     const updatedData = {};

@@ -37,7 +37,8 @@ export function createWelcomeEmailTemplate(name, profileUrl) {
 
 export const createConnectionAcceptedEmailTemplate = (
   senderName,
-  recipientName
+  recipientName,
+  profileUrl
 ) => `
 <!DOCTYPE html>
 <html lang="en">
