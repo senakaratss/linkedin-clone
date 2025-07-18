@@ -123,7 +123,7 @@ const NotificationsPage = () => {
               {notifications.map((notification) => (
                 <li
                   key={notification._id}
-                  className={`bg-white border rounded-lg p-4 transition-all hover:shadow-md ${
+                  className={`bg-white border rounded-lg p-4 my-4 transition-all hover:shadow-md ${
                     !notification.read ? "border-blue-500" : "border-gray-200"
                   }`}
                 >
